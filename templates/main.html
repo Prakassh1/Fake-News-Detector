@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>Fake News Detection</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <form action="/" method="POST">
+    <textarea name="txt" rows="4" cols="50" style="text-align:left" >
+    </textarea>
+    <input type="submit" name="submit" align="left">
+</form>
+<br/> 
+<div align="left">
+    <h3>Enterd Text is: </h3>
+    {{ request.form['txt'] }}
+</div>
+<div align="left">
+    <h3> The given News is a:</h3>
+<p>{% if result == 0 %}
+    <p></p> style="color: red;">Fake News</p>
+   {% else  %}
+    <p><p style="color:seagreen;">True News</p></p>
+   {% endif  %}
+</p> 
+</div>
+
+
+ <div class="login">
+	<h1>Predict Fake News</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="news" color="black" placeholder="Enter the news url" required="required" />
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+   <br>
+   <br>
+   {{ prediction_text }}
+ </div>
+</body>
+</html>
